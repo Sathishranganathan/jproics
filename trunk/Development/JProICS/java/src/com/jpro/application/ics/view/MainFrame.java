@@ -1,85 +1,58 @@
 package com.jpro.application.ics.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Event;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
+import java.awt.Color;
+import java.text.ParseException;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JRootPane;
-import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 
-public class MainFrame {
+import de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel;
 
-	private JFrame frame;
-	private JMenuBar bar;
-	private JMenu mnuFile;
+public class MainFrame extends JFrame {
 
-	private JMenuItem newMenuItem1;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public MainFrame() {
-
-		frame = new JFrame("JPro");
-
-		// Creating the MenuBar For Displaying All the Menus of Program.
-
-		bar = new JMenuBar(); // Creating the MenuBar Object.
-		frame.setJMenuBar(bar); // Setting Main Window MenuBar.
-
-		mnuFile = new JMenu("File");
-		mnuFile.setMnemonic((int) 'F');
-		createFileMenu(mnuFile);
-
-		bar.add(mnuFile);
-
-		JToolBar toolbar = new JToolBar("Toolbar", JToolBar.VERTICAL);
-		JButton button1 = new JButton("Test 1");
-		toolbar.add(button1);
-		JButton button2 = new JButton("Test 2");
-		toolbar.add(button2);
-		JButton button3 = new JButton("Test 3");
-		toolbar.add(button3);
-
-		frame.getContentPane().add(toolbar, BorderLayout.WEST);
-		frame.setUndecorated(true);
-		frame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1000, 800);
-		frame.setVisible(true);
-
-		// Get the size of the screen
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-		// Determine the new location of the window
-		int w = frame.getSize().width;
-		int h = frame.getSize().height;
-		int x = (dim.width - w) / 2;
-		int y = (dim.height - h) / 2;
-
-		// Move the window
-		frame.setLocation(x, y);
-
+		// TODO Auto-generated constructor stub
+		initComponents();
 	}
 
-	private void createFileMenu(JMenu mnuFile2) {
+	private void initComponents() {
+		
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit()
+				.getScreenSize();
+		setBounds((screenSize.width - 800) / 2, (screenSize.height - 600) / 2,
+				800, 600);
 
-		newMenuItem1 = new JMenuItem("New");
-		newMenuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				Event.CTRL_MASK));
-		mnuFile2.add(newMenuItem1);
+		LeftButtonPanel buttonPanel = new LeftButtonPanel();
+		
+
+		add(buttonPanel, BorderLayout.WEST);
+		setVisible(true);
 
 	}
 
 	public static void main(String[] args) {
 
+		// Set cross-platform Java L&F (also called "Metal")
+		try {
+			UIManager.setLookAndFeel(new SyntheticaBlueIceLookAndFeel());
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		new MainFrame();
 
 	}
-
 }
