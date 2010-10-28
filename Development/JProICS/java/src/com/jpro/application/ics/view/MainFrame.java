@@ -5,11 +5,14 @@ import java.awt.Color;
 import java.text.ParseException;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel;
 
 public class MainFrame extends JFrame {
 
@@ -25,6 +28,10 @@ public class MainFrame extends JFrame {
 
 	private void initComponents() {
 		
+		MainMenuBar menuBar = new MainMenuBar();
+		
+		setJMenuBar(menuBar);
+		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit()
 				.getScreenSize();
@@ -32,9 +39,10 @@ public class MainFrame extends JFrame {
 				800, 600);
 
 		LeftButtonPanel buttonPanel = new LeftButtonPanel();
-		
+		MainPanel mainPanel = new MainPanel();
 
 		add(buttonPanel, BorderLayout.WEST);
+		add(mainPanel, BorderLayout.CENTER);
 		setVisible(true);
 
 	}
@@ -43,7 +51,7 @@ public class MainFrame extends JFrame {
 
 		// Set cross-platform Java L&F (also called "Metal")
 		try {
-			UIManager.setLookAndFeel(new SyntheticaBlueIceLookAndFeel());
+			UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
